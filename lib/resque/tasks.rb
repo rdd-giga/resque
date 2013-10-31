@@ -30,6 +30,8 @@ namespace :resque do
           abort "env var BACKGROUND is set, which requires ruby >= 1.9"
       end
       Process.daemon(true, true)
+
+      worker.redis.client.reconnect
     end
 
     if ENV['PIDFILE']
